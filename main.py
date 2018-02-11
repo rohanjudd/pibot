@@ -1,16 +1,46 @@
 import pigpio
 import time
-from servo_motor import Servo_Motor
-servo_1_pin = 23
-servo_2_pin = 24
+from wheels import Wheels
+left_servo_pin = 23
+right_servo_pin = 24
 pig = pigpio.pi()
 
-servo_1 = Servo_Motor(pig, servo_1_pin, True)
-servo_2 = Servo_Motor(pig, servo_2_pin, False)
+wheels = Wheels(pig, left_servo_pin, right_servo_pin)
+
+def forward():
+    wheels.set_speeds(20,20)
+
+def backward():
+    wheels.set_speeds(-20, -20)
+
+def left():
+    wheels.set_speeds(-20, 20)
+
+def right():
+    wheels.set_speeds(20, -20)
+
+def stop():
+    wheels.set_speeds(0, 0)
+
+def close():
+    wheels.disable()
+    quit()
 
 while (True):
-    pw = int(input("input pw"))
-    servo_1.set_pw(pw)
-    servo_2.set_pw(pw)
+    inp = inp("wasd controls")
+    if inp == 'w':
+        forward()
+    elif inp == 'a':
+        forward()
+    elif inp == 's':
+        forward()
+    elif inp == 'd':
+        forward()
+    elif inp == 'x':
+        forward()
+    elif inp == 'q':
+        close()
+
+
 
 
