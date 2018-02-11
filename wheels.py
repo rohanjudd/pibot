@@ -8,7 +8,7 @@ class Wheels:
 
     def set_speeds(self, l, r):
         self.left_servo.set_speed(l)
-        self.left_servo.set_speed(l)
+        self.right_servo.set_speed(r)
 
     def enable(self):
         self.left_servo.enable()
