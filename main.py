@@ -7,17 +7,19 @@ pig = pigpio.pi()
 
 wheels = Wheels(pig, left_servo_pin, right_servo_pin)
 
+s = 22
+
 def forward():
-    set_speeds(20,20)
+    set_speeds(s,s)
 
 def backward():
-    set_speeds(-20, -20)
+    set_speeds(-s, -s)
 
 def left():
-    set_speeds(-20, 20)
+    set_speeds(0, s)
 
 def right():
-    set_speeds(20, -20)
+    set_speeds(s, 0)
 
 def stop():
     set_speeds(0, 0)
