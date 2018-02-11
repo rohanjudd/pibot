@@ -8,36 +8,40 @@ pig = pigpio.pi()
 wheels = Wheels(pig, left_servo_pin, right_servo_pin)
 
 def forward():
-    wheels.set_speeds(20,20)
+    set_speeds(20,20)
 
 def backward():
-    wheels.set_speeds(-20, -20)
+    set_speeds(-20, -20)
 
 def left():
-    wheels.set_speeds(-20, 20)
+    set_speeds(-20, 20)
 
 def right():
-    wheels.set_speeds(20, -20)
+    set_speeds(20, -20)
 
 def stop():
-    wheels.set_speeds(0, 0)
+    set_speeds(0, 0)
+
+def set_speeds(l, r):
+    print("{} {}".format(l,r))
+    wheels.set_speeds(l,r)
 
 def close():
     wheels.disable()
     quit()
 
 while (True):
-    inp = inp("wasd controls")
+    inp = input("wasd controls: ")
     if inp == 'w':
         forward()
     elif inp == 'a':
-        forward()
+        left()
     elif inp == 's':
-        forward()
+        backward()
     elif inp == 'd':
-        forward()
+        right()
     elif inp == 'x':
-        forward()
+        stop()
     elif inp == 'q':
         close()
 

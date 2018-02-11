@@ -18,18 +18,20 @@ class Servo_Motor:
     def set_pulse_width(self, pw):
         self.pig.set_servo_pulsewidth(self.pin, pw)
 
-    def stop(self, speed):
+    def stop(self):
         self.set_pulse_width(OUT_CENTRE)
 
-    def enable(self, speed):
+    def enable(self):
         self.set_pulse_width(OUT_CENTRE)
 
-    def disable(self, speed):
+    def disable(self):
         self.set_pulse_width(0)
 
     def set_speed(self, speed):
         if self.invert:
             speed = speed * -1
+        pw = speed_to_width(speed)
+        print("speed: {}  pw: {}".format(speed, pw))
         self.set_pulse_width(speed_to_width(speed))
 
 
