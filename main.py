@@ -1,9 +1,26 @@
 import pigpio
 import time
+import curses
+
 from wheels import Wheels
+
 left_servo_pin = 23
 right_servo_pin = 24
+
 pig = pigpio.pi()
+
+def input_char(message):
+    try:
+        win = curses.initscr()
+        win.addstr(0, 0, message)
+        while True:
+            ch = win.getch()
+            if ch in range(32, 127): break
+            time.sleep(0.05)
+    except: raise
+    finally:
+        curses.endwin()
+    return chr(ch)
 
 wheels = Wheels(pig, left_servo_pin, right_servo_pin)
 
@@ -33,7 +50,7 @@ def close():
     quit()
 
 while (True):
-    inp = input("wasd controls: ")
+    inp = input_char("wasd controls: ")
     if inp == 'w':
         forward()
     elif inp == 'a':
